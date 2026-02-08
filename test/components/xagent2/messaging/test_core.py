@@ -1,4 +1,4 @@
-from xagent2.my_component import core
+from xagent2.messaging import core
 
 
 def test_sample():

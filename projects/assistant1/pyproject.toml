@@ -1,0 +1,31 @@
+[project]
+name = "assistant1"
+version = "0.1.0"
+description = "Assistant API project"
+requires-python = ">=3.14"
+dependencies = [
+    "email-validator>=2.1.0",
+    "fastapi>=0.111.0",
+    "pydantic>=2.6.0",
+]
+
+[build-system]
+requires = ["hatchling>=1.24.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = ["xagent2"]
+
+[tool.hatch.build.targets.sdist.force-include]
+"../../components/xagent2" = "xagent2"
+"../../bases/xagent2" = "xagent2"
+
+[dependency-groups]
+dev = [
+    "httpx>=0.27.0",
+    "pytest>=8.0.0",
+    "uvicorn>=0.30.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["../../components", "../../bases"]

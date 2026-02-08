@@ -4,16 +4,41 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "fastapi>=0.111.0",
+    "pydantic>=2.6.0",
+    "email-validator>=2.1.0",
+]
 
 [build-system]
 requires = ["hatchling>=1.24.0"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-only-include = ["workspace.toml", "README.md"]
+only-include = [
+    "components/xagent2",
+    "bases/xagent2",
+    "workspace.toml",
+    "README.md",
+]
+sources = ["components", "bases"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/components",
+    "/bases",
+    "/workspace.toml",
+    "/README.md",
+    "/pyproject.toml",
+]
 
 [dependency-groups]
 dev = [
+    "httpx>=0.27.0",
     "polylith-cli>=1.41.1",
+    "pytest>=8.0.0",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["components", "bases"]
+testpaths = ["test"]
